@@ -22,6 +22,7 @@ import java.util.List;
 public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHolder> {
     private final ArrayList<ListViewItem> mDatalist;
 
+    // listener interface 생성
     public interface RecyclerViewClickListener {
         void onFavoriteClicked();
         void onItemClicked();
