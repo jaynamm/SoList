@@ -9,7 +9,7 @@ I hope this project will be completed by this year.
 ### Project LOG
 * 191009 - create github repository and start anroid app dev
 * 191018 - create fragment on Activity and then added custom listview on fragment.
-* 191024 - apply realm with DBhelper (get list and insert list in listFragment) and apply recyclerView.
+* 191024 - apply realm with DBhelper (get list and insert list in listFragment) and apply recyclerView with onBindViewHolder.
 
 ### Project TODO
 * 191024 - apply recyclerview (complete) and create function that change and delete list (trying)
