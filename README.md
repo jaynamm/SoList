@@ -1,10 +1,10 @@
 # Android APP Project
 
 ### Project INTRODUCE
-This project is a todo list checking app development project.
-I'm developing an app now.
-and then I'm doing a lot of trial and error.
-I hope this project will be completed by this year.
+This project is a todo list checking app development project.  
+I'm developing an app now.  
+and then I'm doing a lot of trial and error.  
+I hope this project will be completed by this year.  
 
 ### Project LOG
 * 191009 - create github repository and start anroid app dev
