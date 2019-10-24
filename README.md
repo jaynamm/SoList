@@ -1,6 +1,9 @@
 # Android APP Project
 
-##### 191018
-    I created fragment on Activity and then added custom listview, EditText and Button on fragment.
-    In the future, we will use a sharedPreference to get a list.
-    I don't know that how much time I need.
+### Project Log
+* 191009 - create github repository and start anroid app dev
+* 191018 - create fragment on Activity and then added custom listview on fragment.
+* 191024 - apply realm and DBhelper (get list and insert list in listFragment)
+
+### Project ToDo
+* 191024 - apply view holder and create function that change and delete list.
