@@ -4,25 +4,25 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.todoapptest.Adapter.ListViewAdapter;
+import com.example.todoapptest.DBHelper.DBHelper;
+import com.example.todoapptest.Item.ListViewItem;
 import com.example.todoapptest.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -82,24 +82,43 @@ public class ListFragment extends Fragment {
         // Inflate the layout for this fragment
         final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.fragment_list, container, false);
 
+        ArrayList<ListViewItem> listViewItems = DBHelper.getInstance().getList();
+
         // ArrayAdapter 생성. 아이템 View를 선택(single choice)가능하도록 만듦.
-        final ListViewAdapter adapter = new ListViewAdapter();
+        final ListViewAdapter adapter = new ListViewAdapter(listViewItems);
         // listview 생성 및 adapter 지정.
         final ListView listview = (ListView) layout.findViewById(R.id.list_view);
         // listview와 어탭터 연결
         listview.setAdapter(adapter) ;
 
         final EditText inputText = (EditText) layout.findViewById(R.id.input_edittext);
+        String contents = inputText.getText().toString();
         Button addButton = (Button) layout.findViewById(R.id.input_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // inputText 에 들어있는 문자 listview 에 입력
                 String contents = inputText.getText().toString();
-                adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.menu_star), contents);
-                adapter.notifyDataSetChanged();
-                inputText.setText("");
+
+                if(contents != "") {
+                    adapter.addItem(contents);
+
+                    Date date = new Date(System.currentTimeMillis());
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+                    String getTime = sdf.format(date);
+                    // realm DB list insert
+                    DBHelper.getInstance().insertList(contents, date);
+                    // 리스트뷰 갱신
+                    adapter.notifyDataSetChanged();
+                    // 갱신 후 editText 초기화
+                    inputText.setText("");
+                } else {
+                    Toast.makeText(getContext(), "할 일을 입력해주세요 !", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+
 
         return layout;
     }

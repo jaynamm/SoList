@@ -1,8 +1,6 @@
 package com.example.todoapptest.Adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +17,12 @@ import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter {
 
-    private ArrayList<ListViewItem> items = new ArrayList<>();
+    private ArrayList<ListViewItem> items = new ArrayList<ListViewItem>() {};
 
-    public ListViewAdapter(){
+    public ListViewAdapter(){ }
 
+    public ListViewAdapter(ArrayList<ListViewItem> listViewItems) {
+        this.items = listViewItems;
     }
 
     @Override
@@ -41,17 +41,13 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final Context context = parent.getContext();
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_view_item, parent, false);
         }
-
-        // SharedPreferences 생성
-        SharedPreferences sharedPreferences = context.getSharedPreferences("list", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         ImageView favoorite = (ImageView) convertView.findViewById(R.id.list_favorite_image);
         TextView contents = (TextView) convertView.findViewById(R.id.list_contents_text);
@@ -64,22 +60,20 @@ public class ListViewAdapter extends BaseAdapter {
         status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "status check", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "position : " + position, Toast.LENGTH_SHORT).show();
             }
         });
 
         return convertView;
     }
 
-    /* 아이템 데이터 추가를 위한 함수. 자신이 원하는대로 작성 */
-    public void addItem(Drawable favorite, String contents) {
-
+    public void addItem(String contents) {
         ListViewItem mItem = new ListViewItem();
 
         // 아이템 setting
-        mItem.setList_favorite(favorite);
+        //mItem.setList_favorite(favorite);
         mItem.setList_contents(contents);
-        mItem.setList_status("0");
+        //mItem.setList_status("0");
         System.out.println("check");
         // mItems에 추가한다.
         items.add(mItem);

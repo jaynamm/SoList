@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-
+// realm plugin 적용
+apply plugin: 'realm-android'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -17,6 +18,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    realm {
+        syncEnabled = true
+    }
 }
 
 dependencies {
@@ -29,4 +33,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     // material 라이브러리 추가
     implementation 'com.google.android.material:material:1.0.0'
+    // JSON 라이브러리
+    implementation 'com.google.code.gson:gson:2.8.4'
 }

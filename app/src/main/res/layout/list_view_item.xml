@@ -24,7 +24,7 @@
             android:layout_weight="5"
             android:text="타이틀"
             android:textSize="20dp"
-            android:gravity=""/>
+            android:layout_gravity="center" />
 
         <Button
             android:id="@+id/list_status_button"
