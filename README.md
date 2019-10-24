@@ -6,4 +6,4 @@
 * 191024 - apply realm with DBhelper (get list and insert list in listFragment) and apply recyclerView.
 
 ### Project ToDo
-* 191024 - apply recyclerview and create function that change and delete list.
+* 191024 - apply recyclerview (complete) and create function that change and delete list (trying)
