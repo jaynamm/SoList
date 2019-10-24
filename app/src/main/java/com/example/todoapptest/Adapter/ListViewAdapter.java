@@ -1,6 +1,7 @@
 package com.example.todoapptest.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
     public interface RecyclerViewClickListener {
         void onFavoriteClicked();
         void onItemClicked();
-        void onItemLongClicked();
+        void onItemLongClicked(int id);
         void onStatusClicked();
     }
 
@@ -49,11 +50,13 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ListViewItem items = mDatalist.get(position);
-        //holder.favorite.setImageDrawable(items.getList_favorite());
+        final ListViewItem items = mDatalist.get(position);
 
-        holder.contents.setText(items.getList_contents());
-        //holder.status.setText(items.getList_status());
+        final int list_id = items.getList_id();
+        final String list_contents = items.getList_contents();
+        final Date list_date = items.getList_date();
+
+        holder.contents.setText(list_contents);
 
         if (mListener != null) {
             final int pos = position;
@@ -66,7 +69,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
                 @Override
                 public boolean onLongClick(View v) {
-                    mListener.onItemLongClicked();
+                    mListener.onItemLongClicked(list_id);
                     return true;
                 }
             });

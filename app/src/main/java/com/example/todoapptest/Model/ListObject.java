@@ -10,31 +10,17 @@ public class ListObject extends RealmObject {
     private int list_id;
     private String contents;
     private Date writeDate;
+    private int visible;
 
     public ListObject(){
 
     }
 
-    public ListObject(int list_id) {
-        this.list_id = list_id;
-    }
-
-    public ListObject(int list_id, String contents) {
-        this.list_id = list_id;
-        this.contents = contents;
-    }
-
-    public ListObject(int list_id, String contents, Date writeDate) {
-        this.list_id = list_id;
-        this.contents = contents;
-        this.writeDate = writeDate;
-    }
-
-    public int getlist_id() {
+    public int getList_id() {
         return list_id;
     }
 
-    public void setlist_id(int list_id) {
+    public void setList_id(int list_id) {
         this.list_id = list_id;
     }
 
@@ -52,5 +38,13 @@ public class ListObject extends RealmObject {
 
     public void setWriteDate(Date writeDate) {
         this.writeDate = writeDate;
+    }
+
+    public int getVisible() {
+        return visible;
+    }
+
+    public void setVisible(int visible) {
+        this.visible = visible;
     }
 }

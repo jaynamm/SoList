@@ -46,11 +46,14 @@ public class DBHelper {
             nextID = curID.intValue() + 1;
         }
 
-        listObject.setlist_id(nextID);
+        Log.d("CUR ID", ""+curID);
+        Log.d("NEXT ID", ""+nextID);
+
+        listObject.setList_id(nextID);
         listObject.setContents(contents);
         listObject.setWriteDate(writeDate);
 
-        Log.d(TAG, "insert : " + listObject);
+        Log.d("INSERT LIST", ""+listObject);
 
         realm.beginTransaction();
         realm.copyToRealm(listObject);
@@ -59,12 +62,12 @@ public class DBHelper {
 
     public ArrayList<ListViewItem> getList(){
         RealmResults<ListObject> lists = realm.where(ListObject.class).findAll();
-        Log.d(TAG, "list : " + lists);
+        Log.d(TAG, "list : " + lists + "\n");
         ArrayList<ListViewItem> listItems = new ArrayList<>();
 
         for(int i=0; i<lists.size(); i++){
             listItems.add(new ListViewItem(
-                    lists.get(i).getlist_id(),
+                    lists.get(i).getList_id(),
                     lists.get(i).getContents(),
                     lists.get(i).getWriteDate()
             ));
@@ -88,15 +91,16 @@ public class DBHelper {
         realm.commitTransaction();
     }
 
-    public void deleteList(int list_id) {
+    public void deleteList(final int list_id) {
         RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("list_id", list_id).findAll();
+        RealmResults<ListObject> lists_result = realm.where(ListObject.class).findAll();
 
         if (lists.isEmpty()) {
             return;
         }
 
         realm.beginTransaction();
-        realm.deleteAll();
+        lists.deleteAllFromRealm();
         realm.commitTransaction();
     }
 }

@@ -1,7 +1,9 @@
 package com.example.todoapptest.Fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -132,22 +134,34 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
     // recyclerView Click Listener
     @Override
     public void onFavoriteClicked() {
-
+        Toast.makeText(getContext(), "즐겨찾기", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onItemClicked() {
-
+        Toast.makeText(getContext(), "수정하기", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onItemLongClicked() {
-        //DBHelper.getInstance().deleteList();
+    public void onItemLongClicked(int id) {
+        Toast.makeText(getContext(), "list_id : " + id, Toast.LENGTH_SHORT).show();
+        final int list_id = id;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("삭제하시겠습니까?");
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getContext(), "리스트가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                DBHelper.getInstance().deleteList(list_id);
+            }
+        });
+        builder.setNegativeButton("아니오", null);
+        builder.show();
     }
 
     @Override
     public void onStatusClicked() {
-
+        Toast.makeText(getContext(), "상태 표시", Toast.LENGTH_SHORT).show();
     }
 
     @Override
