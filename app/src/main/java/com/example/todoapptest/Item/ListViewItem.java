@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import java.util.Date;
 
 public class ListViewItem {
+    private int list_id;
     private String list_contents;
     private Drawable list_favorite;
     private String list_status;
@@ -14,16 +15,18 @@ public class ListViewItem {
 
     }
 
-    public ListViewItem(String list_contents, Date list_date) {
+    public ListViewItem(int list_id, String list_contents, Date list_date) {
+        this.list_id = list_id;
         this.list_contents = list_contents;
         this.list_date = list_date;
     }
 
-    public ListViewItem(String list_contents, Drawable list_favorite, String list_status, Date list_date) {
-        this.list_contents = list_contents;
-        this.list_favorite = list_favorite;
-        this.list_status = list_status;
-        this.list_date = list_date;
+    public int getList_id() {
+        return list_id;
+    }
+
+    public void setList_id(int list_id) {
+        this.list_id = list_id;
     }
 
     public String getList_contents() {

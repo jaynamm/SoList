@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todoapptest.Adapter.ListViewAdapter;
 import com.example.todoapptest.DBHelper.DBHelper;
@@ -33,7 +35,7 @@ import java.util.Date;
  * Use the {@link ListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment implements ListViewAdapter.RecyclerViewClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,20 +78,24 @@ public class ListFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.fragment_list, container, false);
 
+        // get listViewItem realm DB
         ArrayList<ListViewItem> listViewItems = DBHelper.getInstance().getList();
 
+        // recyclerView 생성 및 adapter 지정.
+        final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.list_view);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
         // ArrayAdapter 생성. 아이템 View를 선택(single choice)가능하도록 만듦.
         final ListViewAdapter adapter = new ListViewAdapter(listViewItems);
-        // listview 생성 및 adapter 지정.
-        final ListView listview = (ListView) layout.findViewById(R.id.list_view);
-        // listview와 어탭터 연결
-        listview.setAdapter(adapter) ;
+        // recyclerView 어댑터 연결
+        recyclerView.setAdapter(adapter) ;
 
         final EditText inputText = (EditText) layout.findViewById(R.id.input_edittext);
         String contents = inputText.getText().toString();
@@ -118,9 +124,36 @@ public class ListFragment extends Fragment {
             }
         });
 
-
+        adapter.setOnClickedListener(this);
 
         return layout;
+    }
+
+    // recyclerView Click Listener
+    @Override
+    public void onFavoriteClicked() {
+
+    }
+
+    @Override
+    public void onItemClicked() {
+
+    }
+
+    @Override
+    public void onItemLongClicked() {
+        //DBHelper.getInstance().deleteList();
+    }
+
+    @Override
+    public void onStatusClicked() {
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -148,12 +181,6 @@ public class ListFragment extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
         */
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     /**

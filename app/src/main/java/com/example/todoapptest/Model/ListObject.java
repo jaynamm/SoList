@@ -3,9 +3,11 @@ package com.example.todoapptest.Model;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class ListObject extends RealmObject {
-    private int seq;
+    @PrimaryKey
+    private int list_id;
     private String contents;
     private Date writeDate;
 
@@ -13,27 +15,27 @@ public class ListObject extends RealmObject {
 
     }
 
-    public ListObject(int seq) {
-        this.seq = seq;
+    public ListObject(int list_id) {
+        this.list_id = list_id;
     }
 
-    public ListObject(int seq, String contents) {
-        this.seq = seq;
+    public ListObject(int list_id, String contents) {
+        this.list_id = list_id;
         this.contents = contents;
     }
 
-    public ListObject(int seq, String contents, Date writeDate) {
-        this.seq = seq;
+    public ListObject(int list_id, String contents, Date writeDate) {
+        this.list_id = list_id;
         this.contents = contents;
         this.writeDate = writeDate;
     }
 
-    public int getSeq() {
-        return seq;
+    public int getlist_id() {
+        return list_id;
     }
 
-    public void setSeq(int seq) {
-        this.seq = seq;
+    public void setlist_id(int list_id) {
+        this.list_id = list_id;
     }
 
     public String getContents() {

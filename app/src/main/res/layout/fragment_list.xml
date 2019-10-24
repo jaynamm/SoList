@@ -7,11 +7,12 @@
     tools:context=".Fragment.ListFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        tools:listitem="@layout/list_view_item"/>
 
     <LinearLayout
         android:layout_width="match_parent"
