@@ -13,3 +13,4 @@ I hope this project will be completed by this year.
 
 ### Project TODO
 * 191024 - apply recyclerview (complete) and create function that change and delete list (trying)
+* 191026 - create change and delete function and then code refectoring (all source)
