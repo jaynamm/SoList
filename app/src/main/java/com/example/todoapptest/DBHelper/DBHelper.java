@@ -34,11 +34,13 @@ public class DBHelper {
     }
 
     // 새롭게 추가하는 부분
+
     public void insertList(String contents, Date writeDate) {
         ListObject listObject = new ListObject();
 
         Number curID = realm.where(ListObject.class).max("list_id");
 
+        // 수동으로 auto increase 해주기
         int nextID;
         if(curID == null) {
             nextID = 1;
@@ -49,11 +51,13 @@ public class DBHelper {
         Log.d("CUR ID", ""+curID);
         Log.d("NEXT ID", ""+nextID);
 
+        // Object 객체 안에 데이터 입력하기
         listObject.setList_id(nextID);
-        listObject.setContents(contents);
-        listObject.setWriteDate(writeDate);
+        listObject.setList_contents(contents);
+        listObject.setList_writeDate(writeDate);
 
-        Log.d("INSERT LIST", ""+listObject);
+        Log.d("INSERT DB",
+                "[ ID : " + nextID + " , CONTENTS : " + contents + " , WRITE DATE : "+writeDate + " ]");
 
         realm.beginTransaction();
         realm.copyToRealm(listObject);
@@ -61,22 +65,26 @@ public class DBHelper {
     }
 
     public ArrayList<ListViewItem> getList(){
-        RealmResults<ListObject> lists = realm.where(ListObject.class).findAll();
-        Log.d(TAG, "list : " + lists + "\n");
+        RealmResults<ListObject> lists = realm.where(ListObject.class).findAll().sort("list_id");
+
         ArrayList<ListViewItem> listItems = new ArrayList<>();
 
         for(int i=0; i<lists.size(); i++){
             listItems.add(new ListViewItem(
                     lists.get(i).getList_id(),
-                    lists.get(i).getContents(),
-                    lists.get(i).getWriteDate()
+                    lists.get(i).getList_contents(),
+                    lists.get(i).getList_writeDate()
             ));
+
+            Log.d("GET LIST", "[ ID : "+lists.get(i).getList_id()
+                    + " , CONTENTS : "+lists.get(i).getList_contents()
+                    + " , WRITE DATE : "+lists.get(i).getList_writeDate() + " ]");
         }
 
         return listItems;
     }
 
-    public void editList(int list_id, String contents, Date writeDate) {
+    public void editList(int list_id, String contents) {
         RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("list_id", list_id).findAll();
 
         if (lists.isEmpty()) {
@@ -85,22 +93,33 @@ public class DBHelper {
 
         ListObject list = lists.get(0);
 
+
+        Log.d("EDIT LIST", "[ ID : " + lists.get(0).getList_id()
+                + " , CONTENTS : " + lists.get(0).getList_contents()
+                + " , WRITE DATE : " + lists.get(0).getList_writeDate() + " ]");
+
+
         realm.beginTransaction();
-        list.setContents(contents);
-        list.setWriteDate(writeDate);
+        list.setList_contents(contents);
         realm.commitTransaction();
     }
 
     public void deleteList(final int list_id) {
-        RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("list_id", list_id).findAll();
-        RealmResults<ListObject> lists_result = realm.where(ListObject.class).findAll();
+        final RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("list_id", list_id).findAll();
 
         if (lists.isEmpty()) {
             return;
         }
 
-        realm.beginTransaction();
-        lists.deleteAllFromRealm();
-        realm.commitTransaction();
+        Log.d("DELETE LIST", "[ ID : " + lists.get(0).getList_id()
+                + " , CONTENTS : " + lists.get(0).getList_contents()
+                + " , WRITE DATE : " + lists.get(0).getList_writeDate() + " ]");
+
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                lists.deleteAllFromRealm();
+            }
+        });
     }
 }

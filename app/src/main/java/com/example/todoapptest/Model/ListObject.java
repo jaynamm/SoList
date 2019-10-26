@@ -1,5 +1,7 @@
 package com.example.todoapptest.Model;
 
+import android.graphics.drawable.Drawable;
+
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -8,11 +10,11 @@ import io.realm.annotations.PrimaryKey;
 public class ListObject extends RealmObject {
     @PrimaryKey
     private int list_id;
-    private String contents;
-    private Date writeDate;
-    private int visible;
+    private String list_contents;
+    private String list_status;
+    private Date list_writeDate;
 
-    public ListObject(){
+    public ListObject() {
 
     }
 
@@ -24,27 +26,27 @@ public class ListObject extends RealmObject {
         this.list_id = list_id;
     }
 
-    public String getContents() {
-        return contents;
+    public String getList_contents() {
+        return list_contents;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void setList_contents(String list_contents) {
+        this.list_contents = list_contents;
     }
 
-    public Date getWriteDate() {
-        return writeDate;
+    public String getList_status() {
+        return list_status;
     }
 
-    public void setWriteDate(Date writeDate) {
-        this.writeDate = writeDate;
+    public void setList_status(String list_status) {
+        this.list_status = list_status;
     }
 
-    public int getVisible() {
-        return visible;
+    public Date getList_writeDate() {
+        return list_writeDate;
     }
 
-    public void setVisible(int visible) {
-        this.visible = visible;
+    public void setList_writeDate(Date list_writeDate) {
+        this.list_writeDate = list_writeDate;
     }
 }

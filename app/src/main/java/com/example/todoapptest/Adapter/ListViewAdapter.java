@@ -1,6 +1,8 @@
 package com.example.todoapptest.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,26 +10,28 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.todoapptest.DBHelper.DBHelper;
+import com.example.todoapptest.Dialog.EditCustomDialog;
 import com.example.todoapptest.Item.ListViewItem;
 import com.example.todoapptest.R;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHolder> {
-    private final ArrayList<ListViewItem> mDatalist;
+    private final ArrayList<ListViewItem> mDataList;
+    private Context mContext;
 
     // listener interface 생성
     public interface RecyclerViewClickListener {
         void onFavoriteClicked();
         void onItemClicked();
-        void onItemLongClicked(int id);
+        void onItemLongClicked();
         void onStatusClicked();
     }
 
@@ -37,8 +41,9 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
         mListener = listener;
     }
 
-    public ListViewAdapter(ArrayList<ListViewItem> listitems){
-        mDatalist = listitems;
+    public ListViewAdapter(Context context, ArrayList<ListViewItem> mList){
+        mContext = context;
+        mDataList = mList;
     }
 
     @NonNull
@@ -49,12 +54,12 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final ListViewItem items = mDatalist.get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        final ListViewItem items = mDataList.get(position);
 
         final int list_id = items.getList_id();
         final String list_contents = items.getList_contents();
-        final Date list_date = items.getList_date();
+        final Date list_date = items.getList_writeDate();
 
         holder.contents.setText(list_contents);
 
@@ -63,13 +68,29 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemClicked();
+                    EditCustomDialog dialog = new EditCustomDialog(mContext);
+                    dialog.callFunction(mDataList, pos, items);
+                    notifyDataSetChanged();
                 }
             });
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
                 @Override
                 public boolean onLongClick(View v) {
-                    mListener.onItemLongClicked(list_id);
+                    //mListener.onItemLongClicked(pos, list_id);
+                    android.app.AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setMessage("삭제하시겠습니까?");
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mDataList.remove(pos);
+                            //notifyItemRemoved(pos);
+                            notifyDataSetChanged();
+                            DBHelper.getInstance().deleteList(list_id);
+                            Toast.makeText(mContext, "리스트가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.setNegativeButton("아니오", null);
+                    builder.show();
                     return true;
                 }
             });
@@ -95,17 +116,20 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mDatalist.size();
+        return mDataList.size();
     }
 
     public void addItem(String contents) {
         ListViewItem mItem = new ListViewItem();
-        // 아이템 setting
 
-        //mItem.setList_id();
         mItem.setList_contents(contents);
-        // mItems에 추가한다.
-        mDatalist.add(mItem);
+
+        mDataList.add(mItem);
+    }
+
+    public void editItem(int position, ListViewItem item){
+        mDataList.set(position, item);
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

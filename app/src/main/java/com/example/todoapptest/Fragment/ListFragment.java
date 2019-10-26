@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,20 +96,24 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         // ArrayAdapter 생성. 아이템 View를 선택(single choice)가능하도록 만듦.
-        final ListViewAdapter adapter = new ListViewAdapter(listViewItems);
+        final ListViewAdapter adapter = new ListViewAdapter(getContext(), listViewItems);
         // recyclerView 어댑터 연결
         recyclerView.setAdapter(adapter) ;
 
+        // 할 일 추가 버튼
         final EditText inputText = (EditText) layout.findViewById(R.id.input_edittext);
-        String contents = inputText.getText().toString();
+
         Button addButton = (Button) layout.findViewById(R.id.input_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // inputText 에 들어있는 문자 listview 에 입력
                 String contents = inputText.getText().toString();
+                Log.d("INSERT TEXT", ""+contents);
 
-                if(contents != "") {
+                if(contents == "" && contents.equals("") && contents == null) {
+                    Toast.makeText(getContext(), "할 일을 입력해주세요 !", Toast.LENGTH_SHORT).show();
+                } else {
                     adapter.addItem(contents);
 
                     Date date = new Date(System.currentTimeMillis());
@@ -120,8 +125,6 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
                     adapter.notifyDataSetChanged();
                     // 갱신 후 editText 초기화
                     inputText.setText("");
-                } else {
-                    Toast.makeText(getContext(), "할 일을 입력해주세요 !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -131,37 +134,25 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         return layout;
     }
 
-    // recyclerView Click Listener
+    // recyclerView ClickListener
     @Override
     public void onFavoriteClicked() {
-        Toast.makeText(getContext(), "즐겨찾기", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "즐겨찾기", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onItemClicked() {
-        Toast.makeText(getContext(), "수정하기", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
-    public void onItemLongClicked(int id) {
-        Toast.makeText(getContext(), "list_id : " + id, Toast.LENGTH_SHORT).show();
-        final int list_id = id;
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("삭제하시겠습니까?");
-        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), "리스트가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                DBHelper.getInstance().deleteList(list_id);
-            }
-        });
-        builder.setNegativeButton("아니오", null);
-        builder.show();
+    public void onItemLongClicked() {
+
     }
 
     @Override
     public void onStatusClicked() {
-        Toast.makeText(getContext(), "상태 표시", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "상태 표시", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -6,19 +6,19 @@ import java.util.Date;
 
 public class ListViewItem {
     private int list_id;
-    private String list_contents;
     private Drawable list_favorite;
+    private String list_contents;
     private String list_status;
-    private Date list_date;
+    private Date list_writeDate;
 
     public ListViewItem(){
 
     }
 
-    public ListViewItem(int list_id, String list_contents, Date list_date) {
+    public ListViewItem(int list_id, String list_contents, Date list_writeDate) {
         this.list_id = list_id;
         this.list_contents = list_contents;
-        this.list_date = list_date;
+        this.list_writeDate = list_writeDate;
     }
 
     public int getList_id() {
@@ -53,11 +53,11 @@ public class ListViewItem {
         this.list_status = list_status;
     }
 
-    public Date getList_date() {
-        return list_date;
+    public Date getList_writeDate() {
+        return list_writeDate;
     }
 
-    public void setList_date(Date list_date) {
-        this.list_date = list_date;
+    public void setList_writeDate(Date list_writeDate) {
+        this.list_writeDate = list_writeDate;
     }
 }
