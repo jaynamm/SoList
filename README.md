@@ -7,8 +7,11 @@ and then I'm doing a lot of trial and error.
 I hope this project will be completed by this year.  
 
 ### Library
-##### 
-    //recyclerView
+##### Project
+    // realm
+    classpath "io.realm:realm-gradle-plugin:3.5.0"
+##### Module
+    // recyclerView Li
     implementation 'com.android.support:recyclerview-v7:29.0.0'
     // cardView
     implementation 'com.android.support:cardview-v7:29.0.0'
