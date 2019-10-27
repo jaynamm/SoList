@@ -11,7 +11,7 @@ I hope this project will be completed by this year.
     // realm
     classpath "io.realm:realm-gradle-plugin:3.5.0"
 ##### Module
-    // recyclerView Li
+    // recyclerView
     implementation 'com.android.support:recyclerview-v7:29.0.0'
     // cardView
     implementation 'com.android.support:cardview-v7:29.0.0'
