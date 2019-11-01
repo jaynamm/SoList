@@ -81,7 +81,6 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         }
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,13 +94,15 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.list_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
         // ArrayAdapter 생성. 아이템 View를 선택(single choice)가능하도록 만듦.
         final ListViewAdapter adapter = new ListViewAdapter(getContext(), listViewItems);
+
         // recyclerView 어댑터 연결
         recyclerView.setAdapter(adapter) ;
 
         // 할 일 추가 버튼
-        final EditText inputText = (EditText) layout.findViewById(R.id.input_edittext);
+        final EditText inputText = (EditText) layout.findViewById(R.id.input_editText);
 
         Button addButton = (Button) layout.findViewById(R.id.input_button);
         addButton.setOnClickListener(new View.OnClickListener() {

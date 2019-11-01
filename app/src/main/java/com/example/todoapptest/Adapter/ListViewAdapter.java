@@ -23,9 +23,10 @@ import com.example.todoapptest.R;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHolder> {
+public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHolder> implements EditCustomDialog.CustomDialogListener {
     private final ArrayList<ListViewItem> mDataList;
     private Context mContext;
+    private EditCustomDialog dialog;
 
     // listener interface 생성
     public interface RecyclerViewClickListener {
@@ -57,55 +58,36 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final ListViewItem items = mDataList.get(position);
 
-        final int list_id = items.getList_id();
-        final String list_contents = items.getList_contents();
-        final Date list_date = items.getList_writeDate();
+        final int list_id = items.getId();
+        final String list_contents = items.getContents();
+        final Date list_date = items.getWriteDate();
+
+        // customDialog create and set Listener
+        dialog = new EditCustomDialog(mContext);
+        dialog.setCustomDialogListener(this);
 
         holder.contents.setText(list_contents);
 
         if (mListener != null) {
             final int pos = position;
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    EditCustomDialog dialog = new EditCustomDialog(mContext);
-                    dialog.callFunction(mDataList, pos, items);
-                    notifyDataSetChanged();
-                }
+            holder.itemView.setOnClickListener(v -> {
+                // 수정하는 dialog 띄우기
+                dialog.callFunction(pos, items);
             });
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
-                @Override
-                public boolean onLongClick(View v) {
-                    //mListener.onItemLongClicked(pos, list_id);
-                    android.app.AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setMessage("삭제하시겠습니까?");
-                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            mDataList.remove(pos);
-                            //notifyItemRemoved(pos);
-                            notifyDataSetChanged();
-                            DBHelper.getInstance().deleteList(list_id);
-                            Toast.makeText(mContext, "리스트가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    builder.setNegativeButton("아니오", null);
-                    builder.show();
-                    return true;
-                }
+            holder.itemView.setOnLongClickListener(v -> {
+                deleteItem(pos, list_id);
+                return true;
             });
-            holder.status.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onStatusClicked();
-                }
-            });
+            holder.status.setOnClickListener(v -> mListener.onStatusClicked());
+            /*
             holder.favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onFavoriteClicked();
                 }
             });
+
+             */
         }
     }
 
@@ -121,25 +103,49 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
 
     public void addItem(String contents) {
         ListViewItem mItem = new ListViewItem();
-
-        mItem.setList_contents(contents);
-
+        mItem.setContents(contents);
         mDataList.add(mItem);
     }
 
-    public void editItem(int position, ListViewItem item){
+    // 길게 눌렀을 때 삭제하는 Dialog 뜨고 '예' 누르면 삭제하기
+    public void deleteItem(final int position, final int id){
+        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setMessage("삭제하시겠습니까?");
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mDataList.remove(position);
+                notifyDataSetChanged();
+                DBHelper.getInstance().deleteList(id);
+                Toast.makeText(mContext, "리스트가 삭제되었습니다", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("아니오", null);
+        builder.show();
+    }
+
+    // customDialog 에서 Listener 가져와서 수정하기
+    @Override
+    public void onPositiveClicked(int position, ListViewItem item) {
         mDataList.set(position, item);
         notifyDataSetChanged();
+        DBHelper.getInstance().editList(item.getId(), item.getContents());
+        Toast.makeText(mContext, "리스트가 수정되었습니다", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNegativeClicked() {
+        Toast.makeText(mContext, "취소되었습니다", Toast.LENGTH_SHORT).show();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView favorite;
+        //ImageView favorite;
         TextView contents;
         Button status;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            favorite = itemView.findViewById(R.id.list_favorite_image);
+            //favorite = itemView.findViewById(R.id.list_favorite_image);
             contents = itemView.findViewById(R.id.list_contents_text);
             status = itemView.findViewById(R.id.list_status_button);
         }

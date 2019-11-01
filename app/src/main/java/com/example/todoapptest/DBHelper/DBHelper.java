@@ -38,7 +38,7 @@ public class DBHelper {
     public void insertList(String contents, Date writeDate) {
         ListObject listObject = new ListObject();
 
-        Number curID = realm.where(ListObject.class).max("list_id");
+        Number curID = realm.where(ListObject.class).max("id");
 
         // 수동으로 auto increase 해주기
         int nextID;
@@ -52,12 +52,11 @@ public class DBHelper {
         Log.d("NEXT ID", ""+nextID);
 
         // Object 객체 안에 데이터 입력하기
-        listObject.setList_id(nextID);
-        listObject.setList_contents(contents);
-        listObject.setList_writeDate(writeDate);
+        listObject.setId(nextID);
+        listObject.setContents(contents);
+        listObject.setWriteDate(writeDate);
 
-        Log.d("INSERT DB",
-                "[ ID : " + nextID + " , CONTENTS : " + contents + " , WRITE DATE : "+writeDate + " ]");
+        Log.d("INSERT DB", "[ ID : " + nextID + " , CONTENTS : " + contents + " , WRITE DATE : "+writeDate + " ]");
 
         realm.beginTransaction();
         realm.copyToRealm(listObject);
@@ -65,27 +64,27 @@ public class DBHelper {
     }
 
     public ArrayList<ListViewItem> getList(){
-        RealmResults<ListObject> lists = realm.where(ListObject.class).findAll().sort("list_id");
+        RealmResults<ListObject> lists = realm.where(ListObject.class).findAll().sort("id");
 
         ArrayList<ListViewItem> listItems = new ArrayList<>();
 
         for(int i=0; i<lists.size(); i++){
             listItems.add(new ListViewItem(
-                    lists.get(i).getList_id(),
-                    lists.get(i).getList_contents(),
-                    lists.get(i).getList_writeDate()
+                    lists.get(i).getId(),
+                    lists.get(i).getContents(),
+                    lists.get(i).getWriteDate()
             ));
 
-            Log.d("GET LIST", "[ ID : "+lists.get(i).getList_id()
-                    + " , CONTENTS : "+lists.get(i).getList_contents()
-                    + " , WRITE DATE : "+lists.get(i).getList_writeDate() + " ]");
+            Log.d("GET LIST", "[ ID : "+lists.get(i).getId()
+                    + " , CONTENTS : "+lists.get(i).getContents()
+                    + " , WRITE DATE : "+lists.get(i).getWriteDate() + " ]");
         }
 
         return listItems;
     }
 
     public void editList(int list_id, String contents) {
-        RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("list_id", list_id).findAll();
+        RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("id", list_id).findAll();
 
         if (lists.isEmpty()) {
             return;
@@ -93,27 +92,26 @@ public class DBHelper {
 
         ListObject list = lists.get(0);
 
-
-        Log.d("EDIT LIST", "[ ID : " + lists.get(0).getList_id()
-                + " , CONTENTS : " + lists.get(0).getList_contents()
-                + " , WRITE DATE : " + lists.get(0).getList_writeDate() + " ]");
+        Log.d("EDIT LIST", "[ ID : " + lists.get(0).getId()
+                + " , CONTENTS : " + lists.get(0).getContents()
+                + " , WRITE DATE : " + lists.get(0).getWriteDate() + " ]");
 
 
         realm.beginTransaction();
-        list.setList_contents(contents);
+        list.setContents(contents);
         realm.commitTransaction();
     }
 
     public void deleteList(final int list_id) {
-        final RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("list_id", list_id).findAll();
+        final RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("id", list_id).findAll();
 
         if (lists.isEmpty()) {
             return;
         }
 
-        Log.d("DELETE LIST", "[ ID : " + lists.get(0).getList_id()
-                + " , CONTENTS : " + lists.get(0).getList_contents()
-                + " , WRITE DATE : " + lists.get(0).getList_writeDate() + " ]");
+        Log.d("DELETE LIST", "[ ID : " + lists.get(0).getId()
+                + " , CONTENTS : " + lists.get(0).getContents()
+                + " , WRITE DATE : " + lists.get(0).getWriteDate() + " ]");
 
         realm.executeTransaction(new Realm.Transaction() {
             @Override
