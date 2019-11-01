@@ -23,14 +23,17 @@ I hope this project will be completed by this year.
     implementation 'com.android.support:recyclerview-v7:29.0.0'
     // cardView
     implementation 'com.android.support:cardview-v7:29.0.0'
+    // support design
+    implementation 'com.android.support:design:29.1.1'
 
 ### Project LOG
 * 191009 - create github repository and start anroid app dev
 * 191018 - create fragment on Activity and then added custom listview on fragment.
 * 191024 - apply realm with DBhelper (get list and insert list in listFragment) and apply recyclerView with onBindViewHolder.
 * 191026 - create delete list function and code refectoring (data set , adapter source , etc)
+* 191101 - apply function of edit and delete list, apply ViewPager with Fragment, set CalendarView on another fragment.
 
 ### Project TODO
 * 191024 - ~~apply recyclerview (complete)~~ and create function that change and delete list (trying)
 * 191026 - create change and ~~delete~~ function ~~and then code refectoring (all source)~~
-* 191101 - ~~apply edit list function and change delete list function on recylerView~~, ~~apply ViewPager~~ and set calender on another fragment.
+* 191101 - ~~apply edit list function and change delete list function on recylerView~~, ~~apply ViewPager~~ and ~~set calendar on another fragment.~~
