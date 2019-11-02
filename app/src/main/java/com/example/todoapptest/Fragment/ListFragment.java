@@ -14,9 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -93,6 +95,7 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         // recyclerView 생성 및 adapter 지정.
         final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.list_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(layoutManager);
 
         // ArrayAdapter 생성. 아이템 View를 선택(single choice)가능하도록 만듦.
@@ -100,6 +103,30 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
 
         // recyclerView 어댑터 연결
         recyclerView.setAdapter(adapter) ;
+
+        // adapter listener set
+        adapter.setOnClickedListener(this);
+
+        // 날짜 가져오기
+        TextView yearTextView = (TextView) layout.findViewById(R.id.year_textView);
+        TextView monthTextView = (TextView) layout.findViewById(R.id.month_textView);
+        TextView dayTextView = (TextView) layout.findViewById(R.id.day_textView);
+
+        Date getdate = new Date(System.currentTimeMillis());
+
+        SimpleDateFormat yearForm = new SimpleDateFormat("yyyy");
+        SimpleDateFormat monthForm = new SimpleDateFormat("MM");
+        SimpleDateFormat dayForm = new SimpleDateFormat("dd");
+
+        String curYear = yearForm.format(getdate);
+        String curMonth = monthForm.format(getdate);
+        String curDay = dayForm.format(getdate);
+
+        Log.d("GET DATE", "get date : " + curYear + " / " + curMonth + " / " + curDay);
+
+        yearTextView.setText(curYear);
+        monthTextView.setText(curMonth);
+        dayTextView.setText(curDay);
 
         // 할 일 추가 버튼
         final EditText inputText = (EditText) layout.findViewById(R.id.input_editText);
@@ -130,9 +157,11 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
             }
         });
 
-        adapter.setOnClickedListener(this);
-
         return layout;
+    }
+
+    public void getDate(Context context){
+
     }
 
     // recyclerView ClickListener
