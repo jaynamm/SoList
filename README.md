@@ -35,5 +35,6 @@ I hope this project will be completed by this year.
 
 ### Project TODO
 * 191024 - ~~apply recyclerview (complete)~~ and create function that change and delete list (trying)
-* 191026 - create change and ~~delete~~ function ~~and then code refectoring (all source)~~
+* 191026 - create change and ~~delete~~ function ~~and then code refactoring (all source)~~
 * 191101 - ~~apply edit list function and change delete list function on recylerView~~, ~~apply ViewPager~~ and ~~set calendar on another fragment.~~
+* 191102 - think about how to connect calendar and list and then how to show listView functions
