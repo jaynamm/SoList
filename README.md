@@ -1,6 +1,6 @@
 # Android APP Project - ToDoList
 
-### Project INTRODUCE
+### Project INTRO
 This project is a todo list checking app development project.  
 I'm developing an app now.  
 and then I'm doing a lot of trial and error.  
