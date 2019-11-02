@@ -27,11 +27,12 @@ I hope this project will be completed by this year.
     implementation 'com.android.support:design:29.1.1'
 
 ### Project LOG
-* 191009 - create github repository and start anroid app dev
-* 191018 - create fragment on Activity and then added custom listview on fragment.
-* 191024 - apply realm with DBhelper (get list and insert list in listFragment) and apply recyclerView with onBindViewHolder.
-* 191026 - create delete list function and code refectoring (data set , adapter source , etc)
-* 191101 - apply function of edit and delete list, apply ViewPager with Fragment, set CalendarView on another fragment.
+* 191009 - created github repository and started anroid app dev
+* 191018 - created fragment on Activity and then added custom listview on fragment.
+* 191024 - applied realm with DBhelper (get list and insert list in listFragment) and applied recyclerView with onBindViewHolder.
+* 191026 - created delete list function and source code refactoring (data set , adapter source , etc)
+* 191101 - applied function of edit list and delete list, applied ViewPager with Fragment, set CalendarView on another fragment.
+* 191102 - got date on listFragment, removed title bar and then put the date in that.
 
 ### Project TODO
 * 191024 - ~~apply recyclerview (complete)~~ and create function that change and delete list (trying)
