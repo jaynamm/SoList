@@ -30,7 +30,7 @@ I hope this project will be completed by this year.
 
 ### Project LOG 
 <details>
-    <summary>LOG CHECK</summary>
+    <summary>VIEW LOG</summary>
 
 * 191009 - created github repository and started anroid app dev
 * 191018 - created fragment on Activity and then added custom listview on fragment.
@@ -43,7 +43,7 @@ I hope this project will be completed by this year.
 
 ### Project TODO
 <details>
-    <summary>TODO CHECK</summary>
+    <summary>VIEW TODO</summary>
 
 * 191024 - ~~apply recyclerview (complete)~~ and create function that change and delete list (trying)
 * 191026 - create change and ~~delete~~ function ~~and then code refactoring (all source)~~
