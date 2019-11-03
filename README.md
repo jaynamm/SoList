@@ -28,8 +28,9 @@ I hope this project will be completed by this year.
     // appcompat
     implementation "com.android.support:appcompat-v7:29.0.0"
 
-### Project LOG <details>
-    <summary></summary>
+### Project LOG 
+<details>
+    <summary>LOG CHECK</summary>
 
     * 191009 - created github repository and started anroid app dev
     * 191018 - created fragment on Activity and then added custom listview on fragment.
@@ -41,8 +42,12 @@ I hope this project will be completed by this year.
 </details>
 
 ### Project TODO
-* 191024 - ~~apply recyclerview (complete)~~ and create function that change and delete list (trying)
-* 191026 - create change and ~~delete~~ function ~~and then code refactoring (all source)~~
-* 191101 - ~~apply edit list function and change delete list function on recylerView~~, ~~apply ViewPager~~ and ~~set calendar on another fragment.~~
-* 191102 - think about how to connect calendar and list and then how to show listView functions
-* 191103 - ~~update list Fragment~~ and do things that didn't yesterday
+<details>
+    <summary>TODO CHECK</summary>
+
+    * 191024 - ~~apply recyclerview (complete)~~ and create function that change and delete list (trying)
+    * 191026 - create change and ~~delete~~ function ~~and then code refactoring (all source)~~
+    * 191101 - ~~apply edit list function and change delete list function on recylerView~~, ~~apply ViewPager~~ and ~~set calendar on another fragment.~~
+    * 191102 - think about how to connect calendar and list and then how to show listView functions
+    * 191103 - ~~update list Fragment~~ and do things that didn't yesterday
+</details>
