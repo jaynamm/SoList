@@ -43,6 +43,15 @@
             android:textSize="24dp"
             tools:text="DD" />
 
+        <TextView
+            android:id="@+id/day_of_week_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
+            android:textSize="24dp"
+            tools:text="E" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -56,21 +65,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="3dp">
 
-        <EditText
+        <com.example.todoapptest.ClearEditText
             android:id="@+id/input_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5" />
+            android:layout_margin="2dp"
+            android:layout_weight="5"
+            android:background="@drawable/round_border_edit_text"
+            android:layout_gravity="center"
+            android:padding="6dp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/input_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:background="#00FFFFFF"
-            android:text="더하기" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_create_black_18dp_2x" />
 
     </LinearLayout>
 

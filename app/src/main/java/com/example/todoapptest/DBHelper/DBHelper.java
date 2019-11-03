@@ -35,7 +35,7 @@ public class DBHelper {
 
     // 새롭게 추가하는 부분
 
-    public void insertList(String contents, Date writeDate) {
+    public void insertList(String contents, String writeDate) {
         ListObject listObject = new ListObject();
 
         Number curID = realm.where(ListObject.class).max("id");

@@ -12,7 +12,7 @@ public class ListObject extends RealmObject {
     private int id;
     private String contents;
     private String status;
-    private Date writeDate;
+    private String writeDate;
 
     public ListObject(){
 
@@ -42,11 +42,11 @@ public class ListObject extends RealmObject {
         this.status = status;
     }
 
-    public Date getWriteDate() {
+    public String getWriteDate() {
         return writeDate;
     }
 
-    public void setWriteDate(Date writeDate) {
+    public void setWriteDate(String writeDate) {
         this.writeDate = writeDate;
     }
 }

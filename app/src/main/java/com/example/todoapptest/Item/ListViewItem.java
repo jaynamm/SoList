@@ -5,13 +5,13 @@ import java.util.Date;
 public class ListViewItem {
     private int id;
     private String contents;
-    private Date writeDate;
+    private String writeDate;
 
     public ListViewItem() {
 
     }
 
-    public ListViewItem(int id, String contents, Date writeDate) {
+    public ListViewItem(int id, String contents, String writeDate) {
         this.id = id;
         this.contents = contents;
         this.writeDate = writeDate;
@@ -33,11 +33,11 @@ public class ListViewItem {
         this.contents = contents;
     }
 
-    public Date getWriteDate() {
+    public String getWriteDate() {
         return writeDate;
     }
 
-    public void setWriteDate(Date writeDate) {
+    public void setWriteDate(String writeDate) {
         this.writeDate = writeDate;
     }
 }

@@ -6,6 +6,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -71,6 +72,9 @@ public class EditCustomDialog {
                 // 커스텀 다이얼로그를 종료한다.
                 listViewItem.setContents(editContents.getText().toString());
                 mListener.onPositiveClicked(position, listViewItem);
+
+                InputMethodManager mInputMethodManager = (InputMethodManager) context.getSystemService(context.INPUT_METHOD_SERVICE);
+                mInputMethodManager.hideSoftInputFromWindow(editContents.getWindowToken(), 0);
                 dialog.dismiss();
             }
         });

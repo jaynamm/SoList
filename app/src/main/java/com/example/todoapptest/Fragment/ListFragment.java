@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,13 +25,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todoapptest.Adapter.ListViewAdapter;
+import com.example.todoapptest.ClearEditText;
 import com.example.todoapptest.DBHelper.DBHelper;
 import com.example.todoapptest.Item.ListViewItem;
 import com.example.todoapptest.R;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 /**
@@ -111,27 +118,31 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         TextView yearTextView = (TextView) layout.findViewById(R.id.year_textView);
         TextView monthTextView = (TextView) layout.findViewById(R.id.month_textView);
         TextView dayTextView = (TextView) layout.findViewById(R.id.day_textView);
+        TextView dayofWeekTextView = (TextView) layout.findViewById(R.id.day_of_week_textView);
 
-        Date getdate = new Date(System.currentTimeMillis());
+        Date getDate = new Date(System.currentTimeMillis());
 
         SimpleDateFormat yearForm = new SimpleDateFormat("yyyy");
         SimpleDateFormat monthForm = new SimpleDateFormat("MM");
         SimpleDateFormat dayForm = new SimpleDateFormat("dd");
+        SimpleDateFormat dayOfWeekForm = new SimpleDateFormat("E");
 
-        String curYear = yearForm.format(getdate);
-        String curMonth = monthForm.format(getdate);
-        String curDay = dayForm.format(getdate);
+        String curYear = yearForm.format(getDate)+"년";
+        String curMonth = monthForm.format(getDate)+"월";
+        String curDay = dayForm.format(getDate)+"일";
+        String curDoW = dayOfWeekForm.format(getDate)+"요일";
 
-        Log.d("GET DATE", "get date : " + curYear + " / " + curMonth + " / " + curDay);
+        Log.d("GET DATE", "get date : " + curYear + " / " + curMonth + " / " + curDay + " / " + curDoW);
 
         yearTextView.setText(curYear);
         monthTextView.setText(curMonth);
         dayTextView.setText(curDay);
+        dayofWeekTextView.setText(curDoW);
 
         // 할 일 추가 버튼
         final EditText inputText = (EditText) layout.findViewById(R.id.input_editText);
 
-        Button addButton = (Button) layout.findViewById(R.id.input_button);
+        ImageButton addButton = (ImageButton) layout.findViewById(R.id.input_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,23 +156,33 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
                     adapter.addItem(contents);
 
                     Date date = new Date(System.currentTimeMillis());
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-                    String getTime = sdf.format(date);
+                    SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd E HH:mm:ss", Locale.ENGLISH);
+                    String getWriteDate = date_format.format(date);
+
                     // realm DB list insert
-                    DBHelper.getInstance().insertList(contents, date);
+                    DBHelper.getInstance().insertList(contents, getWriteDate);
                     // 리스트뷰 갱신
                     adapter.notifyDataSetChanged();
                     // 갱신 후 editText 초기화
-                    inputText.setText("");
+                    inputText.setText(null);
+
+                    onHideKeyboard(getContext(), inputText);
                 }
             }
+        });
+
+
+        layout.setOnClickListener(v -> {
+            onHideKeyboard(getContext(), inputText);
         });
 
         return layout;
     }
 
-    public void getDate(Context context){
-
+    // 입력창에서 밖을 클릭했을 때 키보드 사라지게 만들기
+    public void onHideKeyboard(Context context, EditText editText) {
+        InputMethodManager mInputMethodManager = (InputMethodManager) context.getSystemService(context.INPUT_METHOD_SERVICE);
+        mInputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
     // recyclerView ClickListener

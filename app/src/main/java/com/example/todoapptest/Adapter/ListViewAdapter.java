@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,7 +61,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
 
         final int list_id = items.getId();
         final String list_contents = items.getContents();
-        final Date list_date = items.getWriteDate();
+        final String list_date = items.getWriteDate();
 
         // customDialog create and set Listener
         dialog = new EditCustomDialog(mContext);

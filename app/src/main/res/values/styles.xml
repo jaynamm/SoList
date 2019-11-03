@@ -9,5 +9,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <!-- TabLayout theme. -->
+    <style name="TabTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorAccent">@android:color/black</item>
+    </style>
 
 </resources>

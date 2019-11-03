@@ -8,21 +8,33 @@ import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.todoapptest.DBHelper.DBHelper;
+import com.example.todoapptest.Item.ListViewItem;
 import com.example.todoapptest.R;
+
+import org.w3c.dom.Text;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SettingFragment.OnFragmentInteractionListener} interface
+ * {@link HomeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SettingFragment#newInstance} factory method to
+ * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SettingFragment extends Fragment {
+public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,7 +46,7 @@ public class SettingFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public SettingFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -44,11 +56,11 @@ public class SettingFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingFragment.
+     * @return A new instance of fragment HomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SettingFragment newInstance(String param1, String param2) {
-        SettingFragment fragment = new SettingFragment();
+    public static HomeFragment newInstance(String param1, String param2) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,7 +81,26 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final ConstraintLayout layout = (ConstraintLayout) inflater.inflate(R.layout.fragment_setting, container, false);
+        final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.fragment_home, container, false);
+
+        TextView getDataView = (TextView) layout.findViewById(R.id.get_data_view);
+        getDataView.setMovementMethod(new ScrollingMovementMethod());
+        Button getalldataButton = (Button) layout.findViewById(R.id.data_all_select_button);
+
+        getalldataButton.setOnClickListener(v -> {
+            ArrayList<ListViewItem> allData = DBHelper.getInstance().getList();
+
+            getDataView.setText(null);
+            String col = String.format("%-5s %-20s %-30s \n", "ID", "CONTENTS", "DATE");
+            getDataView.append(col);
+            for(int i=0; i<allData.size(); i++){
+                String data = String.format("%-5d %-20s %-30s \n",
+                        allData.get(i).getId(),
+                        allData.get(i).getContents(),
+                        allData.get(i).getWriteDate());
+                getDataView.append(data);
+            }
+        });
 
         return layout;
     }
