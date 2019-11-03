@@ -30,14 +30,14 @@ I hope this project will be completed by this year.
 
 <details>
     <summary>Project LOG</summary>
-### Project LOG
-* 191009 - created github repository and started anroid app dev
-* 191018 - created fragment on Activity and then added custom listview on fragment.
-* 191024 - applied realm with DBhelper (get list and insert list in listFragment) and applied recyclerView with onBindViewHolder.
-* 191026 - created delete list function and source code refactoring (data set , adapter source , etc)
-* 191101 - applied function of edit list and delete list, applied ViewPager with Fragment, set CalendarView on another fragment.
-* 191102 - got date on listFragment, removed title bar and then put the date in that.
-* 191103 - update ViewPager and TabLayout, changed EditText form and style and then applied function that hide keyboard when click add Button and layout. finally, changed date format when input Database.
+    ### Project LOG
+    * 191009 - created github repository and started anroid app dev
+    * 191018 - created fragment on Activity and then added custom listview on fragment.
+    * 191024 - applied realm with DBhelper (get list and insert list in listFragment) and applied recyclerView with onBindViewHolder.
+    * 191026 - created delete list function and source code refactoring (data set , adapter source , etc)
+    * 191101 - applied function of edit list and delete list, applied ViewPager with Fragment, set CalendarView on another fragment.
+    * 191102 - got date on listFragment, removed title bar and then put the date in that.
+    * 191103 - update ViewPager and TabLayout, changed EditText form and style and then applied function that hide keyboard when click add Button and layout. finally, changed date format when input Database.
 </details>
 
 ### Project TODO
