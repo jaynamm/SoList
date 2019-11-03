@@ -23,8 +23,10 @@ I hope this project will be completed by this year.
     implementation 'com.android.support:recyclerview-v7:29.0.0'
     // cardView
     implementation 'com.android.support:cardview-v7:29.0.0'
-    // support design
+    // support design (TabLayout)
     implementation 'com.android.support:design:29.1.1'
+    // appcompat
+    implementation "com.android.support:appcompat-v7:29.0.0"
 
 ### Project LOG
 * 191009 - created github repository and started anroid app dev
