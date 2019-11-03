@@ -28,8 +28,7 @@ I hope this project will be completed by this year.
     // appcompat
     implementation "com.android.support:appcompat-v7:29.0.0"
 
-### Project LOG
-<details>
+### Project LOG <details>
     <summary></summary>
 
     * 191009 - created github repository and started anroid app dev
