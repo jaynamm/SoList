@@ -28,10 +28,10 @@ I hope this project will be completed by this year.
     // appcompat
     implementation "com.android.support:appcompat-v7:29.0.0"
 
+### Project LOG
 <details>
-    <summary>Project LOG</summary>
-    
-    ### Project LOG
+    <summary></summary>
+
     * 191009 - created github repository and started anroid app dev
     * 191018 - created fragment on Activity and then added custom listview on fragment.
     * 191024 - applied realm with DBhelper (get list and insert list in listFragment) and applied recyclerView with onBindViewHolder.
