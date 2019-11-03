@@ -28,6 +28,8 @@ I hope this project will be completed by this year.
     // appcompat
     implementation "com.android.support:appcompat-v7:29.0.0"
 
+<details>
+    <summary>Project LOG</summary>
 ### Project LOG
 * 191009 - created github repository and started anroid app dev
 * 191018 - created fragment on Activity and then added custom listview on fragment.
@@ -36,6 +38,7 @@ I hope this project will be completed by this year.
 * 191101 - applied function of edit list and delete list, applied ViewPager with Fragment, set CalendarView on another fragment.
 * 191102 - got date on listFragment, removed title bar and then put the date in that.
 * 191103 - update ViewPager and TabLayout, changed EditText form and style and then applied function that hide keyboard when click add Button and layout. finally, changed date format when input Database.
+</details>
 
 ### Project TODO
 * 191024 - ~~apply recyclerview (complete)~~ and create function that change and delete list (trying)
