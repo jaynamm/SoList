@@ -30,6 +30,7 @@ I hope this project will be completed by this year.
 
 <details>
     <summary>Project LOG</summary>
+    
     ### Project LOG
     * 191009 - created github repository and started anroid app dev
     * 191018 - created fragment on Activity and then added custom listview on fragment.
