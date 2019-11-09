@@ -43,6 +43,8 @@ public class ListObject extends RealmObject {
     }
 
     public String getWriteDate() {
+       // String[] dateFormat = writeDate.split(" ");
+        //return dateFormat[0];
         return writeDate;
     }
 

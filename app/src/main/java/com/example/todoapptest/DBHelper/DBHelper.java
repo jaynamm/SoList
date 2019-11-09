@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -84,7 +85,9 @@ public class DBHelper {
     }
 
     public ArrayList<ListViewItem> getListForDate(String writeDate){
-        RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("writeDate", writeDate).findAll().sort("id");
+        RealmResults<ListObject> lists = realm.where(ListObject.class).contains("writeDate", writeDate).findAll().sort("id");
+
+        Log.d("GET LIST FOR DATE", ""+lists);
 
         ArrayList<ListViewItem> listItems = new ArrayList<>();
 

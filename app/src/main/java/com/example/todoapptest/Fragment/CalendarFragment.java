@@ -3,28 +3,23 @@ package com.example.todoapptest.Fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.example.todoapptest.Adapter.CalendarAdapter;
 import com.example.todoapptest.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import com.example.todoapptest.databinding.CalendarListBinding;
+import com.example.todoapptest.viewModel.CalendarListViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,10 +34,6 @@ public class CalendarFragment extends Fragment {
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         private static final String ARG_PARAM1 = "param1";
         private static final String ARG_PARAM2 = "param2";
-        private static final String GET_YEAR = "year";
-        private static final String GET_MONTH = "month";
-        private static final String GET_DAY = "day";
-        private static final String GET_DAY_OF_WEEKS = "dayOfWeeks";
 
         // TODO: Rename and change types of parameters
         private String mParam1;
@@ -63,13 +54,9 @@ public class CalendarFragment extends Fragment {
      * @return A new instance of fragment CalendarFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CalendarFragment newInstance(String year, String month, String day, String dayOfWeeks) {
+    public static CalendarFragment newInstance() {
         CalendarFragment fragment = new CalendarFragment();
         Bundle args = new Bundle();
-        args.getString(GET_YEAR, year);
-        args.getString(GET_MONTH, month);
-        args.getString(GET_DAY, day);
-        args.getString(GET_DAY_OF_WEEKS, dayOfWeeks);
         fragment.setArguments(args);
         return fragment;
     }
@@ -83,22 +70,49 @@ public class CalendarFragment extends Fragment {
         }
     }
 
-    private static String TAG = "CalendarFragment";
-    private CalendarView mCalendarView;
+    private CalendarListBinding binging;
+    private CalendarListViewModel model;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final ConstraintLayout layout = (ConstraintLayout) inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        mCalendarView = layout.findViewById(R.id.calendarView);
-        mCalendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-            String selectdate = year + "-" + (month+1) + "-" + dayOfMonth;
-            Log.d(TAG, "onSelectedDayChange - date : "+selectdate);
+        binging = DataBindingUtil.inflate(inflater , R.layout.fragment_calendar, container, false);
+        model = ViewModelProviders.of(this).get(CalendarListViewModel.class);
+        binging.setModel(model);
+        binging.setLifecycleOwner(this);
+
+        observe();
+
+        if(model != null) {
+            model.initCalendarList();
+        }
+
+        Button today_button = binging.todayButton;
+        today_button.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "TODAY", Toast.LENGTH_SHORT).show();
         });
 
-        return layout;
+        return binging.getRoot();
+    }
+
+    private void observe() {
+        model.mCalendarList.observe(this, objects -> {
+            RecyclerView view = binging.pagerCalendar;
+            CalendarAdapter adapter = (CalendarAdapter) view.getAdapter();
+            if(adapter != null) {
+                adapter.setCalendarList(objects);
+            } else {
+                StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL);
+                adapter = new CalendarAdapter(objects);
+                view.setLayoutManager(manager);
+                view.setAdapter(adapter);
+                if(model.mCenterPosition >= 0) {
+                    view.scrollToPosition(model.mCenterPosition);
+                }
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

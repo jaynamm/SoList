@@ -1,9 +1,7 @@
 package com.example.todoapptest.Fragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,19 +21,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todoapptest.Adapter.ListViewAdapter;
-import com.example.todoapptest.ClearEditText;
 import com.example.todoapptest.DBHelper.DBHelper;
 import com.example.todoapptest.Item.ListViewItem;
 import com.example.todoapptest.R;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
 
 
 /**
@@ -99,8 +90,25 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         // Inflate the layout for this fragment
         final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.fragment_list, container, false);
 
+        // 날짜 가져오기
+        Date getDate = new Date(System.currentTimeMillis());
+
+        SimpleDateFormat yearForm = new SimpleDateFormat("yyyy");
+        SimpleDateFormat monthForm = new SimpleDateFormat("MM");
+        SimpleDateFormat dayForm = new SimpleDateFormat("dd");
+        SimpleDateFormat dayOfWeekForm = new SimpleDateFormat("E");
+
+        String curYear = yearForm.format(getDate);
+        String curMonth = monthForm.format(getDate);
+        String curDay = dayForm.format(getDate);
+        String curDoW = dayOfWeekForm.format(getDate);
+
+        String dateFormat = curYear + "-" + curMonth + "-" + curDay;
+
         // get listViewItem realm DB
-        ArrayList<ListViewItem> listViewItems = DBHelper.getInstance().getList();
+        //ArrayList<ListViewItem> listViewItems = DBHelper.getInstance().getList();
+        ArrayList<ListViewItem> listViewItems = DBHelper.getInstance().getListForDate(dateFormat);
+        //ArrayList<ListViewItem> listViewItems = DBHelper.getInstance().getListForDate("2019-11-03");
 
         // recyclerView 생성 및 adapter 지정.
         final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.list_view);
@@ -117,30 +125,17 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         // adapter listener set
         adapter.setOnClickedListener(this);
 
-        // 날짜 가져오기
         TextView yearTextView = (TextView) layout.findViewById(R.id.year_textView);
         TextView monthTextView = (TextView) layout.findViewById(R.id.month_textView);
         TextView dayTextView = (TextView) layout.findViewById(R.id.day_textView);
         TextView dayofWeekTextView = (TextView) layout.findViewById(R.id.day_of_week_textView);
 
-        Date getDate = new Date(System.currentTimeMillis());
-
-        SimpleDateFormat yearForm = new SimpleDateFormat("yyyy");
-        SimpleDateFormat monthForm = new SimpleDateFormat("MM");
-        SimpleDateFormat dayForm = new SimpleDateFormat("dd");
-        SimpleDateFormat dayOfWeekForm = new SimpleDateFormat("E");
-
-        String curYear = yearForm.format(getDate)+"년";
-        String curMonth = monthForm.format(getDate)+"월";
-        String curDay = dayForm.format(getDate)+"일";
-        String curDoW = dayOfWeekForm.format(getDate)+"요일";
-
         Log.d("GET DATE", "get date : " + curYear + " / " + curMonth + " / " + curDay + " / " + curDoW);
 
-        yearTextView.setText(curYear);
-        monthTextView.setText(curMonth);
-        dayTextView.setText(curDay);
-        dayofWeekTextView.setText(curDoW);
+        yearTextView.setText(curYear+"년");
+        monthTextView.setText(curMonth+"월");
+        dayTextView.setText(curDay+"일");
+        dayofWeekTextView.setText(curDoW+"요일");
 
         // 할 일 추가 버튼
         final EditText inputText = (EditText) layout.findViewById(R.id.input_editText);
