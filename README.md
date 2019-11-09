@@ -39,6 +39,7 @@ I hope this project will be completed by this year.
 * 191101 - applied function of edit list and delete list, applied ViewPager with Fragment, set CalendarView on another fragment.
 * 191102 - got date on listFragment, removed title bar and then put the date in that.
 * 191103 - update ViewPager and TabLayout, changed EditText form and style and then applied function that hide keyboard when click add Button and layout. finally, changed date format when input Database.
+* 191109 - tried to add calendar and get date. but, Nothing was done.
 </details>
 
 ### Project TODO
