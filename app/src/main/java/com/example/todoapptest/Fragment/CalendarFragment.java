@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import com.example.todoapptest.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,35 +35,41 @@ import java.util.Date;
  * create an instance of this fragment.
  */
 public class CalendarFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+        // TODO: Rename parameter arguments, choose names that match
+        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+        private static final String ARG_PARAM1 = "param1";
+        private static final String ARG_PARAM2 = "param2";
+        private static final String GET_YEAR = "year";
+        private static final String GET_MONTH = "month";
+        private static final String GET_DAY = "day";
+        private static final String GET_DAY_OF_WEEKS = "dayOfWeeks";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+        // TODO: Rename and change types of parameters
+        private String mParam1;
+        private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+        private OnFragmentInteractionListener mListener;
 
     public CalendarFragment() {
-        // Required empty public constructor
+            // Required empty public constructor
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * //@param param1 Parameter 1.
+     * //@param param2 Parameter 2.
      * @return A new instance of fragment CalendarFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CalendarFragment newInstance(String param1, String param2) {
+    public static CalendarFragment newInstance(String year, String month, String day, String dayOfWeeks) {
         CalendarFragment fragment = new CalendarFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.getString(GET_YEAR, year);
+        args.getString(GET_MONTH, month);
+        args.getString(GET_DAY, day);
+        args.getString(GET_DAY_OF_WEEKS, dayOfWeeks);
         fragment.setArguments(args);
         return fragment;
     }
@@ -85,8 +94,8 @@ public class CalendarFragment extends Fragment {
 
         mCalendarView = layout.findViewById(R.id.calendarView);
         mCalendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-            String date = year + "/" + (month+1) + "/" + dayOfMonth;
-            Log.d(TAG, "onSelectedDayChange - date : "+date);
+            String selectdate = year + "-" + (month+1) + "-" + dayOfMonth;
+            Log.d(TAG, "onSelectedDayChange - date : "+selectdate);
         });
 
         return layout;

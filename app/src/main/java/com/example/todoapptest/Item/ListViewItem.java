@@ -1,7 +1,5 @@
 package com.example.todoapptest.Item;
 
-import java.util.Date;
-
 public class ListViewItem {
     private int id;
     private String contents;

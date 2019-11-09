@@ -35,6 +35,7 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -50,8 +51,10 @@ import java.util.TimeZone;
 public class ListFragment extends Fragment implements ListViewAdapter.RecyclerViewClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String GET_DATE = "date";
 
     // TODO: Rename and change types of parameters
     private String mParam1;

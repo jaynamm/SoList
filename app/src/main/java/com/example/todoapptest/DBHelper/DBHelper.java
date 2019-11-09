@@ -83,6 +83,26 @@ public class DBHelper {
         return listItems;
     }
 
+    public ArrayList<ListViewItem> getListForDate(String writeDate){
+        RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("writeDate", writeDate).findAll().sort("id");
+
+        ArrayList<ListViewItem> listItems = new ArrayList<>();
+
+        for(int i=0; i<lists.size(); i++){
+            listItems.add(new ListViewItem(
+                    lists.get(i).getId(),
+                    lists.get(i).getContents(),
+                    lists.get(i).getWriteDate()
+            ));
+
+            Log.d("GET LIST FOR DATE", "[ ID : "+lists.get(i).getId()
+                    + " , CONTENTS : "+lists.get(i).getContents()
+                    + " , WRITE DATE : "+lists.get(i).getWriteDate() + " ]");
+        }
+
+        return listItems;
+    }
+
     public void editList(int list_id, String contents) {
         RealmResults<ListObject> lists = realm.where(ListObject.class).equalTo("id", list_id).findAll();
 
