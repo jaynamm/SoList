@@ -50,4 +50,5 @@ I hope this project will be completed by this year.
 * 191101 - ~~apply edit list function and change delete list function on recylerView~~, ~~apply ViewPager~~ and ~~set calendar on another fragment.~~
 * 191102 - think about how to connect calendar and list and then how to show listView functions
 * 191103 - ~~update list Fragment~~ and do things that didn't yesterday
+* 191109 - get list for date on calendar
 </details>
