@@ -40,6 +40,7 @@ I hope this project will be completed by this year.
 * 191102 - got date on listFragment, removed title bar and then put the date in that.
 * 191103 - update ViewPager and TabLayout, changed EditText form and style and then applied function that hide keyboard when click add Button and layout. finally, changed date format when input Database.
 * 191109 - applied open calendar on CalendarFragment and then get list for date on ListFragment, but calendar incomplete.
+* 191112 - i think twice what apps i want to develop
 </details>
 
 ### Project TODO
