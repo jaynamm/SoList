@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,26 +74,38 @@ public class CalendarFragment extends Fragment {
     private CalendarListBinding binging;
     private CalendarListViewModel model;
 
+    private String TAG = "CalendarFragment";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        // 데이터 바인딩으로 layout 설정
+        // 이름은 자동으로 생성되거나 xml 파일에 설정해주면 된다.
         binging = DataBindingUtil.inflate(inflater , R.layout.fragment_calendar, container, false);
         model = ViewModelProviders.of(this).get(CalendarListViewModel.class);
         binging.setModel(model);
         binging.setLifecycleOwner(this);
 
+        Log.d(TAG, "observe() START");
+
         observe();
 
+        Log.d(TAG, "observe() END");
+
+        // 캘린더 생성
         if(model != null) {
             model.initCalendarList();
         }
 
+        /*
         Button today_button = binging.todayButton;
         today_button.setOnClickListener(v -> {
             Toast.makeText(getContext(), "TODAY", Toast.LENGTH_SHORT).show();
+            model.initCalendarList();
         });
+        */
 
         return binging.getRoot();
     }
