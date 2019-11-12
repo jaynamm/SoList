@@ -52,4 +52,5 @@ I hope this project will be completed by this year.
 * 191102 - think about how to connect calendar and list and then how to show listView functions
 * 191103 - ~~update list Fragment~~ and do things that didn't yesterday
 * 191109 - get list for date on calendar
+* 191112 - calendar sources analysis and find another soultions.
 </details>
