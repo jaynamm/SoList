@@ -54,4 +54,5 @@ I hope this project will be completed by this year.
 * 191103 - ~~update list Fragment~~ and do things that didn't yesterday
 * 191109 - get list for date on calendar
 * 191112 - calendar sources analysis and find another soultions.
+* 191119 - create custom calendar on new fragment
 </details>
