@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHolder> implements EditCustomDialog.CustomDialogListener {
-    private final ArrayList<ListViewItem> mDataList;
+    private ArrayList<ListViewItem> mDataList;
     private Context mContext;
     private EditCustomDialog dialog;
 
@@ -44,6 +44,11 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
     }
 
     public ListViewAdapter(Context context, ArrayList<ListViewItem> mList){
+        mContext = context;
+        mDataList = mList;
+    }
+
+    public void setListViewForDate(Context context, ArrayList<ListViewItem> mList) {
         mContext = context;
         mDataList = mList;
     }

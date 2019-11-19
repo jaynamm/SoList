@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.todoapptest.Adapter.PagerAdapter;
 import com.example.todoapptest.Fragment.CalendarFragment;
+import com.example.todoapptest.Fragment.CustomCalendarFragment;
 import com.example.todoapptest.Fragment.HomeFragment;
 import com.example.todoapptest.Fragment.ListFragment;
 import com.example.todoapptest.Fragment.SettingFragment;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.baseline_home_black_18dp_2x));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.sharp_format_list_bulleted_black_18dp_2x));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.baseline_calendar_today_black_18dp_2x));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.baseline_send_black_18dp_2x));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.sharp_more_horiz_black_18dp_2x));
 
         // custom view 가져와서 tab 꾸미기
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragmentList(new HomeFragment());
         adapter.addFragmentList(new ListFragment());
         adapter.addFragmentList(new CalendarFragment());
+        adapter.addFragmentList(new CustomCalendarFragment());
         adapter.addFragmentList(new SettingFragment());
         viewPager.setAdapter(adapter);
     }

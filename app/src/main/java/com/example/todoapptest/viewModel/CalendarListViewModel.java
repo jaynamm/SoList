@@ -39,7 +39,7 @@ public class CalendarListViewModel extends ViewModel {
     public void initCalendarList() {
         Log.d(TAG, "initCalendarList() START");
 
-        GregorianCalendar cal = new GregorianCalendar();
+        GregorianCalendar cal = new GregorianCalendar(); // 현재 날짜 가져오기
         setCalendarList(cal);
 
         Log.d(TAG, "initCalendarList() END");

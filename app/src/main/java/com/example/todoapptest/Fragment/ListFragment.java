@@ -23,10 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.todoapptest.Adapter.ListViewAdapter;
 import com.example.todoapptest.DBHelper.DBHelper;
 import com.example.todoapptest.Item.ListViewItem;
+import com.example.todoapptest.OneDayDecorator;
 import com.example.todoapptest.R;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -84,13 +89,17 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         }
     }
 
+    MaterialCalendarView materialCalendarView;
+
+    private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.fragment_list, container, false);
 
-        // 날짜 가져오기
+        //날짜 가져오기
         Date getDate = new Date(System.currentTimeMillis());
 
         SimpleDateFormat yearForm = new SimpleDateFormat("yyyy");
@@ -105,10 +114,21 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
 
         String dateFormat = curYear + "-" + curMonth + "-" + curDay;
 
+        materialCalendarView = layout.findViewById(R.id.calendarView);
+
+        materialCalendarView.clearSelection();
+
+        materialCalendarView.state().edit()
+                .setFirstDayOfWeek(Calendar.SUNDAY)
+                .setMinimumDate(CalendarDay.from(1999, 0, 1))
+                .setMaximumDate(CalendarDay.from(2999, 11, 31))
+                .setCalendarDisplayMode(CalendarMode.WEEKS)
+                .commit();
+
+        materialCalendarView.addDecorator(oneDayDecorator);
+
         // get listViewItem realm DB
-        //ArrayList<ListViewItem> listViewItems = DBHelper.getInstance().getList();
         ArrayList<ListViewItem> listViewItems = DBHelper.getInstance().getListForDate(dateFormat);
-        //ArrayList<ListViewItem> listViewItems = DBHelper.getInstance().getListForDate("2019-11-03");
 
         // recyclerView 생성 및 adapter 지정.
         final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.list_view);
@@ -125,17 +145,19 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
         // adapter listener set
         adapter.setOnClickedListener(this);
 
+        /*
         TextView yearTextView = (TextView) layout.findViewById(R.id.year_textView);
         TextView monthTextView = (TextView) layout.findViewById(R.id.month_textView);
         TextView dayTextView = (TextView) layout.findViewById(R.id.day_textView);
         TextView dayofWeekTextView = (TextView) layout.findViewById(R.id.day_of_week_textView);
+         */
 
-        Log.d("GET DATE", "get date : " + curYear + " / " + curMonth + " / " + curDay + " / " + curDoW);
+        //Log.d("GET DATE", "get date : " + curYear + " / " + curMonth + " / " + curDay + " / " + curDoW);
 
-        yearTextView.setText(curYear+"년");
-        monthTextView.setText(curMonth+"월");
-        dayTextView.setText(curDay+"일");
-        dayofWeekTextView.setText(curDoW+"요일");
+        //yearTextView.setText(curYear+"년");
+        //monthTextView.setText(curMonth+"월");
+        //dayTextView.setText(curDay+"일");
+        //dayofWeekTextView.setText(curDoW+"요일");
 
         // 할 일 추가 버튼
         final EditText inputText = (EditText) layout.findViewById(R.id.input_editText);
@@ -172,6 +194,33 @@ public class ListFragment extends Fragment implements ListViewAdapter.RecyclerVi
 
         layout.setOnClickListener(v -> {
             onHideKeyboard(getContext(), inputText);
+        });
+
+        materialCalendarView.setOnDateChangedListener((materialCalendarView1, date, b) -> {
+            int Year = date.getYear();
+            int Month = date.getMonth() + 1;
+            int Day = date.getDay();
+
+            String selectedDate;
+            if(Day < 10) {
+                selectedDate = Year + "-" + Month + "-0" + Day;
+            } else {
+                selectedDate = Year + "-" + Month + "-" + Day;
+            }
+
+            // 선택 초기화
+            //materialCalendarView.clearSelection();
+
+            ArrayList<ListViewItem> getData = DBHelper.getInstance().getListForDate(selectedDate);
+
+            Log.d("get Date", ""+selectedDate);
+
+            Log.d("getList", ""+getData);
+
+            adapter.setListViewForDate(getContext(), getData);
+            adapter.notifyDataSetChanged();
+
+            Toast.makeText(getContext(), selectedDate, Toast.LENGTH_SHORT).show();
         });
 
         return layout;

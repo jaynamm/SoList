@@ -51,4 +51,7 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.constraintlayout:constraintlayout-solver:1.1.3'
+
+    // calendar library
+    implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
 }
