@@ -55,4 +55,5 @@ I hope this project will be completed by this year.
 * 191109 - get list for date on calendar
 * 191112 - calendar sources analysis and find another soultions.
 * 191119 - create custom calendar on new fragment
+* 191125 - apply status in list and create the list complete graph for todo list analysis
 </details>
