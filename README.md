@@ -41,6 +41,7 @@ I hope this project will be completed by this year.
 * 191103 - update ViewPager and TabLayout, changed EditText form and style and then applied function that hide keyboard when click add Button and layout. finally, changed date format when input Database.
 * 191109 - applied open calendar on CalendarFragment and then get list for date on ListFragment, but calendar incomplete.
 * 191112 - i think twice what apps i want to develop
+* 191125 - i applied list status. but, i found the wrong source between app and database. so stupid...
 </details>
 
 ### Project TODO
@@ -56,4 +57,5 @@ I hope this project will be completed by this year.
 * 191112 - calendar sources analysis and find another soultions.
 * 191119 - create custom calendar on new fragment
 * 191125 - apply status in list and create the list complete graph for todo list analysis
+* 191126 - i will find the wrong parts in soruce and change that.
 </details>
