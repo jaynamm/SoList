@@ -1,4 +1,4 @@
-# Android APP Project - ToDoList
+# Android APP Project - SoList
 
 ### Project INTRO
 This project is a todo list checking app development project.  
