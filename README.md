@@ -43,6 +43,7 @@ I hope this project will be completed by this year.
 * 191112 - i think twice what apps i want to develop
 * 191125 - i applied list status. but, i found the wrong source between app and database. so stupid...
 * 191126 - I have tried it many times but nothing has changed. so i created a new project to follow from the start.
+* 191127 - i applied the MVVM architecture (RecyclerView, Adapter, ViewModel, LiveData, Room). and i changed DB to realm from room.
 </details>
 
 ### Project TODO
