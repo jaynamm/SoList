@@ -59,4 +59,5 @@ I hope this project will be completed by this year.
 * 191119 - create custom calendar on new fragment
 * 191125 - apply status in list and create the list complete graph for todo list analysis
 * 191126 - i will find the wrong parts in soruce and change that.
+* 191127 - change recyclerview on ListFragment and apply MVVM architecture components.
 </details>
