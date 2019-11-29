@@ -40,10 +40,10 @@ I hope this project will be completed by this year.
 * 191102 - got date on listFragment, removed title bar and then put the date in that.
 * 191103 - update ViewPager and TabLayout, changed EditText form and style and then applied function that hide keyboard when click add Button and layout. finally, changed date format when input Database.
 * 191109 - applied open calendar on CalendarFragment and then get list for date on ListFragment, but calendar incomplete.
-* 191112 - i think twice what apps i want to develop
-* 191125 - i applied list status. but, i found the wrong source between app and database. so stupid...
-* 191126 - I have tried it many times but nothing has changed. so i created a new project to follow from the start.
-* 191127 - i applied the MVVM architecture (RecyclerView, Adapter, ViewModel, LiveData, Room). and i changed DB to realm from room.
+* 191112 - thank what apps i want to develop
+* 191125 - applied list status. but, i found the wrong source between app and database. so stupid...
+* 191126 - have tried it many times but nothing has changed. so i created a new project to follow from the start.
+* 191127 - applied the MVVM architecture (RecyclerView, Adapter, ViewModel, LiveData, Room). and i changed DB to realm from room.
 * 191129 - added list status options and set unfinished list on HomeFragment.
 </details>
 
