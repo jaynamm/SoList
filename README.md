@@ -67,6 +67,8 @@ I hope this project will be completed by this year.
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 </details>
+
+
 ### Project LOG 
 <details>
     <summary>VIEW LOG</summary>
@@ -85,6 +87,7 @@ I hope this project will be completed by this year.
 * 191127 - applied the MVVM architecture (RecyclerView, Adapter, ViewModel, LiveData, Room). and i changed DB to realm from room.
 * 191129 - added list status options and set unfinished list on HomeFragment.
 </details>
+
 
 ### Project TODO
 <details>
