@@ -14,8 +14,6 @@ I hope this project will be completed by this year.
     JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o  
     Windows 10 10.0  
 
-__asfdafdas__
-
 ### Gradle Scripts
     // recyclerView set
     implementation 'com.android.support:recyclerview-v7:29.0.0'
