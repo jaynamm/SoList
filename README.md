@@ -16,6 +16,9 @@ I hope this project will be completed by this year.
 
 ### Gradle Scripts
 ##### Module: app
+<details>
+    <summary>Module: app</summary>
+    
     // recyclerView set
     implementation 'com.android.support:recyclerview-v7:29.0.0'
     // cardView set
@@ -63,7 +66,7 @@ I hope this project will be completed by this year.
     implementation "androidx.room:room-guava:$room_version"
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
-
+</details>
 ### Project LOG 
 <details>
     <summary>VIEW LOG</summary>
