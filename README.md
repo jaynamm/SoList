@@ -15,7 +15,6 @@ I hope this project will be completed by this year.
     Windows 10 10.0  
 
 ### Gradle Scripts
-##### Module: app
 <details>
     <summary>Module: app</summary>
     
