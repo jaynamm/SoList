@@ -16,7 +16,7 @@ I hope this project will be completed by this year.
 
 ### Gradle Scripts
     // recyclerView set
-    **implementation 'com.android.support:recyclerview-v7:29.0.0'
+    __implementation 'com.android.support:recyclerview-v7:29.0.0'__
     // cardView set
     implementation 'com.android.support:cardview-v7:29.0.0'
 
