@@ -85,6 +85,7 @@ I hope this project will be completed by this year.
 * 191126 - have tried it many times but nothing has changed. so i created a new project to follow from the start.
 * 191127 - applied the MVVM architecture (RecyclerView, Adapter, ViewModel, LiveData, Room). and i changed DB to realm from room.
 * 191129 - added list status options and set unfinished list on HomeFragment.
+* 191204 - changed list get function from allList to allListForDate. so could get the list for date.
 </details>
 
 
