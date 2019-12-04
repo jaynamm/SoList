@@ -104,4 +104,5 @@ I hope this project will be completed by this year.
 * 191126 - i will find the wrong parts in soruce and change that.
 * 191127 - change recyclerview on ListFragment and apply MVVM architecture components.
 * 191129 - add list status function and display unfinished list on HomeFragment
+* 191204 - get list for date on ListFragment
 </details>
