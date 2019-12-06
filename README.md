@@ -99,13 +99,13 @@ I hope this project will be completed by this year.
 * 191101 - ~~apply edit list function and change delete list function on recylerView~~, ~~apply ViewPager~~ and ~~set calendar on another fragment.~~
 * 191102 - think about how to connect calendar and list and then how to show listView functions
 * 191103 - ~~update list Fragment~~ and do things that didn't yesterday
-* 191109 - get list for date on calendar
-* 191112 - calendar sources analysis and find another soultions.
+* 191109 - ~~get list for date on calendar~~
+* 191112 - ~~calendar sources analysis and find another soultions.~~
 * 191119 - create custom calendar on new fragment
-* 191125 - apply status in list and create the list complete graph for todo list analysis
-* 191126 - i will find the wrong parts in soruce and change that.
-* 191127 - change recyclerview on ListFragment and apply MVVM architecture components.
-* 191129 - add list status function and display unfinished list on HomeFragment
-* 191204 - get list for date on ListFragment
+* 191125 - ~~apply status in list~~ and create the list complete graph for todo list analysis
+* 191126 - ~~i will find the wrong parts in soruce and change that.~~
+* 191127 - ~~change recyclerview on ListFragment and apply MVVM architecture components.~~
+* 191129 - ~~add list status function and display unfinished list on HomeFragment~~
+* 191204 - ~~get list for date on ListFragment~~
 * 191206 - apply various charts
 </details>
