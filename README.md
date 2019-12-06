@@ -109,3 +109,6 @@ I hope this project will be completed by this year.
 * 191204 - ~~get list for date on ListFragment~~
 * 191206 - apply various charts
 </details>
+
+
+### LICENSE's
